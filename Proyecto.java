@@ -1,5 +1,5 @@
 package daw;
-//Bibliotecas
+
 import java.util.Scanner;
 
 public class Proyecto {
@@ -7,12 +7,11 @@ public class Proyecto {
 	public static void main(String[]args) {
 		Scanner sc= new Scanner(System.in);
 		int i = 1;
-		int opcion=0;
+		int opcion;
 		int j = 2;
-		
+		int bucle=0;
 	String [][]datos=new String[i][j];
 	
-	while (opcion != 4) {
 	System.out.println("Opcion");
 	opcion = sc.nextInt();
 	
@@ -25,13 +24,22 @@ public class Proyecto {
 		inicioSesion(sc, datos);
 		break;
 		
+	case 3:
+		for(int k=0;k < datos.length;k++) {
+			for (int l=0; l< datos[k].length;l++) {
+				System.out.println(datos[k][l] + "");
+			}
+		}
+		break;
+		
 	}
-	}
+	
 	sc.close();
 	for (i = 0; i < datos.length; i++) {
 		System.out.println(datos[i][0] + " -> " + datos[i][1]);
 	}
 	}
+	
 	public static void registroUsuario(Scanner sc, String [][] datos) {
 		System.out.println("Usuario");
 		String nuevoUsuario= sc.next();
@@ -45,30 +53,31 @@ public class Proyecto {
 		}
 		
 	}
-	public static void inicioSesion(Scanner sc, String[][]datos) {
 	
-	        System.out.println("Ingrese su nombre de usuario: ");
-	        String nombreUsuario = sc.nextLine();
-	        System.out.println("Ingrese su contraseña: ");
-	        String contraseña = sc.nextLine();
+	public static void inicioSesion(Scanner sc, String[][]datos) {
+			
+			boolean a=false;
+			do {
 
-	     
-	        boolean existeUsuario = false;
-	        for (int i = 0; i < datos.length; i++) {
-	            if (datos[i][0].equals(nombreUsuario)) {
-	                existeUsuario = true;
-
-	                if (datos[i][1].equals(contraseña)) {
-	                    System.out.println("Inicio de sesión exitoso");
-	                } else {
-	                    System.out.println("La contraseña es incorrecta");
-	                }
-	                break;
-	            }
+        		System.out.println("Ingrese su nombre de usuario: ");
+    	        String nombreUsuario = sc.nextLine();
+            	for (int i = 0; i < datos.length; i++) {
+	        if (datos[i][0].equals(nombreUsuario)) {
+	        	System.out.println("Ingrese su contraseña: ");
+		        String contraseña = sc.nextLine();
+		        if(datos[i][0].equals(nombreUsuario)&&datos[i][1].equals(contraseña)) {
+		        	 a = true;
+		        	System.out.println("Acceso permitido");
+		        }
+		        else {
+		        	System.out.println("Inicio de sesion fallido");
+		        }
 	        }
 
-	        if (!existeUsuario) {
-	            System.out.println("El usuario no existe");
 	        }
-	    }
+	    }while (!a);
 	}
+	}
+
+
+
